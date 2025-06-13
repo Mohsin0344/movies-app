@@ -10,3 +10,9 @@ extension DateFormatter on String {
     }
   }
 }
+
+extension PrettyDateFormat on DateTime {
+  String toPrettyFormat() {
+    return DateFormat('MMMM d, y').format(this);
+  }
+}

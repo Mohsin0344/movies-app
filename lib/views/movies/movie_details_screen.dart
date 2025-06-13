@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/utils/app_extensions.dart';
 import 'package:movies_app/utils/app_fonts.dart';
 import 'package:movies_app/views/widgets/app_elevated_button.dart';
 import 'package:movies_app/views/widgets/custom_cached_network_image.dart';
@@ -119,7 +120,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                   left: 66.w,
                                   right: 66.w,
                                   child: Text(
-                                    'In Theaters December 22, 2021',
+                                    'In Theaters ${state.data.releaseDate?.toPrettyFormat()}',
                                     style: AppFonts.bodyFont(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 20.sp,
