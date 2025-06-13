@@ -6,4 +6,5 @@ class AppAssets {
   static const String moreIcon = 'assets/images/more_icon.png';
   static const String seatingsImage = 'assets/images/seatings.png';
   static const String seatImage = 'assets/images/seat.png';
+  static const String screenImage = 'assets/images/screen.png';
 }

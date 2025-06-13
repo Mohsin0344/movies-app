@@ -18,4 +18,7 @@ class AppColors {
   static const Color overviewColor = Color(0xff8F8F8F);
   static const Color unSelectedItemColor = Color(0xff827D88);
   static const Color lightGrey = Color(0xffF6F6F6);
+  static const Color notAvailableColor = Color(0xffA6A6A6);
+  static const Color selectedColor = Color(0xffCD9D0F);
+  static const Color vipColor = Color(0xff564CA3);
 }
