@@ -2,6 +2,7 @@
 
 A sleek, modern, and feature-packed **Flutter Movie Ticket Booking App** that allows users to explore upcoming movies, view detailed info, watch trailers, and select cinema seats interactively.
 ##  Detail Demo of Flutter App: https://drive.google.com/file/d/1mMyYlUPm3_UlzgZzm5k1SpAxu-GKxJze/view?usp=drivesdk
+##  Detail Demo of Flutter Code: https://drive.google.com/file/d/1pdBihH0bzGL030UpBmUIjtEut9nNwScx/view?usp=sharing
 ---
 
 ## ✨ Features
