@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/routes/route_models/movie_details_route_model.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../cubits/app_states.dart';
 import '../../cubits/movies/search_movie_cubit.dart';
@@ -8,6 +9,7 @@ import '../../models/movies/upcoming_movies_model.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_fonts.dart';
+import '../../utils/route_names.dart';
 import '../widgets/custom_cached_network_image.dart';
 import '../widgets/views_error_handler.dart';
 
@@ -58,53 +60,67 @@ class _SearchMovieScreenState extends State<SearchMovieScreen> {
                     padding: EdgeInsets.only(
                       top: 20.h,
                     ),
-                    child: SizedBox(
-                      height: 100.h,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            height: 100.h,
-                            width: 150.w,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12.r),
-                              child: CustomCachedNetworkImage(
-                                  imageUrl:
-                                      'https://image.tmdb.org/t/p/w500${movie?.backdropPath}'),
-                            ),
+                    child: GestureDetector(
+                      onTap: () {
+                        if(movie?.id == null) {
+                          return;
+                        }
+                        Navigator.pushNamed(
+                          context,
+                          RouteNames.movieDetailsScreen,
+                          arguments: MovieDetailsRouteModel(
+                            movieId: movie!.id!,
                           ),
-                          21.horizontalSpace,
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  movie?.originalTitle ?? '',
-                                  style: AppFonts.bodyFont(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16.sp,
-                                  ),
-                                  maxLines: 2,
-                                ),
-                                8.verticalSpace,
-                                Text(
-                                  movie?.overview ?? '',
-                                  style: AppFonts.bodyFont(
-                                    color: AppColors.lightTextColor,
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  maxLines: 1,
-                                ),
-                              ],
+                        );
+                      },
+                      child: SizedBox(
+                        height: 100.h,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              height: 100.h,
+                              width: 150.w,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.r),
+                                child: CustomCachedNetworkImage(
+                                    imageUrl:
+                                        'https://image.tmdb.org/t/p/w500${movie?.backdropPath}'),
+                              ),
                             ),
-                          ),
-                          Image.asset(
-                            AppAssets.detailsIcon,
-                            width: 20.w,
-                          )
-                        ],
+                            21.horizontalSpace,
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    movie?.originalTitle ?? '',
+                                    style: AppFonts.bodyFont(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16.sp,
+                                    ),
+                                    maxLines: 2,
+                                  ),
+                                  8.verticalSpace,
+                                  Text(
+                                    movie?.overview ?? '',
+                                    style: AppFonts.bodyFont(
+                                      color: AppColors.lightTextColor,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    maxLines: 1,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Image.asset(
+                              AppAssets.detailsIcon,
+                              width: 20.w,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );
