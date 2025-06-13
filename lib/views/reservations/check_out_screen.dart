@@ -312,10 +312,6 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     _controller.value = Matrix4.identity()..scale(0.8);
   }
 
-  void _resetZoom() {
-    _controller.value = Matrix4.identity();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -388,26 +384,21 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                                             null) {
                                           return GestureDetector(
                                             onTap: () {
-                                              if (cinemaLayout[parentIndex]
-                                                          [childIndex]
-                                                      ?.state ==
-                                                  SeatState.notAvailable) {
+                                              final seat =
+                                                  cinemaLayout[parentIndex]
+                                                      [childIndex];
+
+                                              if (seat == null ||
+                                                  seat.state ==
+                                                      SeatState.notAvailable) {
                                                 return;
                                               }
+
                                               setState(() {
-                                                if(cinemaLayout[parentIndex]
-                                                [childIndex]
-                                                    ?.state == SeatState.selected) {
-                                                  cinemaLayout[parentIndex]
-                                                  [childIndex]
-                                                      ?.state =
-                                                      SeatState.available;
-                                                } else {
-                                                  cinemaLayout[parentIndex]
-                                                  [childIndex]
-                                                      ?.state =
-                                                      SeatState.selected;
-                                                }
+                                                seat.state = seat.state ==
+                                                        SeatState.selected
+                                                    ? SeatState.available
+                                                    : SeatState.selected;
                                               });
                                             },
                                             child: Image.asset(
@@ -678,19 +669,21 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     );
   }
 
-  getSeatColor({required Seat seat}) {
-    if (seat.state == SeatState.notAvailable) {
-      return AppColors.notAvailableColor;
-    }
-    if (seat.state == SeatState.selected) {
-      return AppColors.selectedColor;
-    }
-    if (seat.type == SeatType.vip) {
-      return AppColors.vipColor;
-    } else if (seat.type == SeatType.regular) {
-      return AppColors.elevatedButtonColor;
-    } else {
-      return null;
+  Color? getSeatColor({required Seat seat}) {
+    switch (seat.state) {
+      case SeatState.notAvailable:
+        return AppColors.notAvailableColor;
+      case SeatState.selected:
+        return AppColors.selectedColor;
+      default:
+        switch (seat.type) {
+          case SeatType.vip:
+            return AppColors.vipColor;
+          case SeatType.regular:
+            return AppColors.elevatedButtonColor;
+          default:
+            return null;
+        }
     }
   }
 }
