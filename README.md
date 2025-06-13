@@ -86,7 +86,7 @@ lib/
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/your-username/movie_booking_app.git
+   git clone https://github.com/mohsin0344/movie_booking_app.git
    cd movie_booking_app
    ```
 
