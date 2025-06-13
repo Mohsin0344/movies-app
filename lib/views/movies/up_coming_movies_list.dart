@@ -10,6 +10,7 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_fonts.dart';
 import '../../utils/route_names.dart';
 import '../widgets/custom_cached_network_image.dart';
+import '../widgets/loading_indicator.dart';
 import '../widgets/views_error_handler.dart';
 
 class UpComingMoviesList extends StatefulWidget {
@@ -54,6 +55,11 @@ class _UpComingMoviesListState extends State<UpComingMoviesList> {
           ? PagedSliverList.separated(
               pagingController: widget.pagingController,
               builderDelegate: PagedChildBuilderDelegate<UpComingMovie>(
+                firstPageProgressIndicatorBuilder: (context) => const Center(
+                  child: LoadingIndicator(
+                    color: AppColors.purpleColor,
+                  ),
+                ),
                 itemBuilder: (context, movie, index) => SizedBox(
                   height: 180.h,
                   width: 335.w,
@@ -73,6 +79,11 @@ class _UpComingMoviesListState extends State<UpComingMoviesList> {
                 childAspectRatio: 1.8,
               ),
               builderDelegate: PagedChildBuilderDelegate<UpComingMovie>(
+                firstPageProgressIndicatorBuilder: (context) => const Center(
+                  child: LoadingIndicator(
+                    color: AppColors.purpleColor,
+                  ),
+                ),
                 itemBuilder: (context, movie, index) {
                   return movieCard(movie: movie);
                 },
